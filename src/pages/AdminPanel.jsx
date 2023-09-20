@@ -87,6 +87,17 @@ const Admin = () => {
         }
     }
 
+    useEffect(() => {
+        axios.get(`${server}/all`, {
+            withCredentials: true,
+        })
+        .then((res) => {
+            setUsers(res.data.data);
+        }).catch((e) => {
+            toast.error(e.response.data.message);
+        });
+    }, [refresh]);
+
     if(!isAuthenticated) {
         return (
             <Navigate to={"/"} />
@@ -101,19 +112,6 @@ const Admin = () => {
             </div>
         )
     }
-
-    useEffect(() => {
-        axios.get(`${server}/all`, {
-            withCredentials: true,
-        })
-        .then((res) => {
-            setUsers(res.data.data);
-        }).catch((e) => {
-            toast.error(e.response.data.message);
-        });
-    }, [refresh]);
-
-    if(!isAuthenticated) return <Navigate to={"/"} />
 
     return (
         <div>

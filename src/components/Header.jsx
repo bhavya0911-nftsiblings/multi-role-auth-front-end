@@ -25,18 +25,10 @@ const Header = () => {
         }
     }
 
-    if(isAuthenticated) {
-        return (
-            <div>
-                <p>Multi-Role-Auth-App</p>
-                <button onClick={logout} disabled={loading}>Log Out</button>
-            </div>
-        )
-    }
-
     return (
         <div>
             <p>Multi-Role-Auth-App</p>
+            {isAuthenticated && <button onClick={logout} disabled={loading}>Log Out</button>}
         </div>
     )
 
